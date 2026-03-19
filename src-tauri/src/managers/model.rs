@@ -524,6 +524,7 @@ impl ModelManager {
                 supports_translation: false,
                 is_recommended: false,
                 supported_languages: whisper_languages.clone(),
+                supports_language_selection: false,
                 is_custom: false,
             },
         );

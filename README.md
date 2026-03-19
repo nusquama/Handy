@@ -1,15 +1,10 @@
-# Parler
+# Handy
 
-> **This is a personal fork of [cjpais/Handy](https://github.com/cjpais/Handy)** by Melvyn.
-> It adds custom features on top of the original Handy app while keeping full compatibility with upstream.
+**A free, open source, and extensible speech-to-text application.**
 
-## Custom Additions
+Handy is a cross-platform desktop application that provides speech transcription. Press a shortcut, speak, and have your words appear in any text field - locally or enhanced with cloud AI post-processing.
 
-### Rebranding
-
-- **Full Handy to Parler rebrand** - new name, new app icon, updated identifiers across the entire codebase
-- **Geist Pixel font logo** - app name rendered with Geist Pixel Circle font for a distinctive look
-- **ParlerDev development flavor** - separate `com.melvynx.parler.dev` identifier to run dev and production builds side-by-side
+## Features
 
 ### Multi-Provider Post-Processing System
 
@@ -37,24 +32,13 @@
 - **Mute-aware audio feedback** - skips feedback sounds when system volume is muted (macOS + Windows)
 - **Recommended model badges** - Parakeet V3 and Whisper Turbo marked as "Recommended" in the model selector
 
-### Cleanup & Fixes
-
-- **Removed standalone Gemini settings** - Gemini configuration moved into the unified provider system
-- **Removed Windows builds** from release workflow (macOS-only focus)
-- **Pinned Tauri NPM packages** to match Rust crate versions for build stability
-- **Various overlay fixes** - bubble visibility on external displays, cursor position detection
-
 ---
-
-**A free, open source, and extensible speech-to-text application.**
-
-Parler is a cross-platform desktop application that provides speech transcription. Press a shortcut, speak, and have your words appear in any text field - locally or enhanced with cloud AI post-processing.
 
 ## How It Works
 
 1. **Press** a configurable keyboard shortcut to start/stop recording (or use push-to-talk mode)
 2. **Speak** your words while the shortcut is active
-3. **Release** and Parler processes your speech using Whisper
+3. **Release** and Handy processes your speech using Whisper
 4. **Get** your transcribed text pasted directly into whatever app you're using
 
 The process is entirely local:
@@ -73,9 +57,8 @@ The process is entirely local:
    - **macOS**: Also available via [Homebrew cask](https://formulae.brew.sh/cask/handy): `brew install --cask handy`
    - **Windows**: Also available via [winget](https://github.com/microsoft/winget-pkgs): `winget install cjpais.Handy` \
      **Note:** The Homebrew cask and winget package are not maintained by the Handy developers.
-   - **Parler fork**: Also available from the [Parler releases page](https://github.com/Melvynx/Parler/releases)
 2. Install the application
-3. Launch Parler and grant necessary system permissions (microphone, accessibility)
+3. Launch Handy and grant necessary system permissions (microphone, accessibility)
 4. Configure your preferred keyboard shortcuts in Settings
 5. Start transcribing!
 
@@ -85,7 +68,7 @@ For detailed build instructions including platform-specific requirements, see [B
 
 ## Architecture
 
-Parler is built as a Tauri application combining:
+Handy is built as a Tauri application combining:
 
 - **Frontend**: React + TypeScript with Tailwind CSS for the settings UI
 - **Backend**: Rust for system integration, audio processing, and ML inference
@@ -99,14 +82,14 @@ Parler is built as a Tauri application combining:
 
 ### Debug Mode
 
-Parler includes an advanced debug mode for development and troubleshooting. Access it by pressing:
+Handy includes an advanced debug mode for development and troubleshooting. Access it by pressing:
 
 - **macOS**: `Cmd+Shift+D`
 - **Windows/Linux**: `Ctrl+Shift+D`
 
 ### CLI Parameters
 
-Parler supports command-line flags for controlling a running instance and customizing startup behavior. These work on all platforms (macOS, Windows, Linux).
+Handy supports command-line flags for controlling a running instance and customizing startup behavior. These work on all platforms (macOS, Windows, Linux).
 
 **Remote control flags** (sent to an already-running instance via the single-instance plugin):
 
@@ -131,15 +114,15 @@ Flags can be combined for autostart scenarios:
 handy --start-hidden --no-tray
 ```
 
-> **macOS tip:** When Parler is installed as an app bundle, invoke the binary directly:
+> **macOS tip:** When Handy is installed as an app bundle, invoke the binary directly:
 >
 > ```bash
-> /Applications/Parler.app/Contents/MacOS/Parler --toggle-transcription
+> /Applications/Handy.app/Contents/MacOS/Handy --toggle-transcription
 > ```
 
 ## Known Issues & Current Limitations
 
-This project is actively being developed and has some [known issues](https://github.com/Melvynx/Parler/issues). We believe in transparency about the current state:
+This project is actively being developed and has some [known issues](https://github.com/cjpais/Handy/issues). We believe in transparency about the current state:
 
 ### Major Issues (Help Wanted)
 
@@ -170,12 +153,12 @@ For reliable text input on Linux, install the appropriate tool for your display 
 - **Wayland**: Install `wtype` (preferred) or `dotool` for text input to work correctly
 - **dotool setup**: Requires adding your user to the `input` group: `sudo usermod -aG input $USER` (then log out and back in)
 
-Without these tools, Parler falls back to enigo which may have limited compatibility, especially on Wayland.
+Without these tools, Handy falls back to enigo which may have limited compatibility, especially on Wayland.
 
 **Other Notes:**
 
 - **Runtime library dependency (`libgtk-layer-shell.so.0`)**:
-  - Parler links `gtk-layer-shell` on Linux. If startup fails with `error while loading shared libraries: libgtk-layer-shell.so.0`, install the runtime package for your distro:
+  - Handy links `gtk-layer-shell` on Linux. If startup fails with `error while loading shared libraries: libgtk-layer-shell.so.0`, install the runtime package for your distro:
 
     | Distro        | Package to install    | Example command                        |
     | ------------- | --------------------- | -------------------------------------- |
@@ -185,21 +168,21 @@ Without these tools, Parler falls back to enigo which may have limited compatibi
 
   - For building from source on Ubuntu/Debian, you may also need `libgtk-layer-shell-dev`.
 
-- The recording overlay is disabled by default on Linux (`Overlay Position: None`) because certain compositors treat it as the active window. When the overlay is visible it can steal focus, which prevents Parler from pasting back into the application that triggered transcription. If you enable the overlay anyway, be aware that clipboard-based pasting might fail or end up in the wrong window.
+- The recording overlay is disabled by default on Linux (`Overlay Position: None`) because certain compositors treat it as the active window. When the overlay is visible it can steal focus, which prevents Handy from pasting back into the application that triggered transcription. If you enable the overlay anyway, be aware that clipboard-based pasting might fail or end up in the wrong window.
 - If you are having trouble with the app, running with the environment variable `WEBKIT_DISABLE_DMABUF_RENDERER=1` may help
 - **Global keyboard shortcuts (Wayland):** On Wayland, system-level shortcuts must be configured through your desktop environment or window manager. Use the [CLI flags](#cli-parameters) as the command for your custom shortcut.
 
   **GNOME:**
   1. Open **Settings > Keyboard > Keyboard Shortcuts > Custom Shortcuts**
   2. Click the **+** button to add a new shortcut
-  3. Set the **Name** to `Toggle Parler Transcription`
+  3. Set the **Name** to `Toggle Handy Transcription`
   4. Set the **Command** to `handy --toggle-transcription`
   5. Click **Set Shortcut** and press your desired key combination (e.g., `Super+O`)
 
   **KDE Plasma:**
   1. Open **System Settings > Shortcuts > Custom Shortcuts**
   2. Click **Edit > New > Global Shortcut > Command/URL**
-  3. Name it `Toggle Parler Transcription`
+  3. Name it `Toggle Handy Transcription`
   4. In the **Trigger** tab, set your desired key combination
   5. In the **Action** tab, set the command to `handy --toggle-transcription`
 
@@ -219,7 +202,7 @@ Without these tools, Parler falls back to enigo which may have limited compatibi
   bind = $mainMod, O, exec, handy --toggle-transcription
   ```
 
-- You can also manage global shortcuts outside of Parler via Unix signals, which lets Wayland window managers or other hotkey daemons keep ownership of keybindings:
+- You can also manage global shortcuts outside of Handy via Unix signals, which lets Wayland window managers or other hotkey daemons keep ownership of keybindings:
 
   | Signal    | Action                                    | Example                |
   | --------- | ----------------------------------------- | ---------------------- |
@@ -233,7 +216,7 @@ Without these tools, Parler falls back to enigo which may have limited compatibi
   bindsym $mod+p exec pkill -USR1 -n handy
   ```
 
-  `pkill` here simply delivers the signal—it does not terminate the process.
+  `pkill` here simply delivers the signal--it does not terminate the process.
 
 ### Platform Support
 
@@ -243,7 +226,7 @@ Without these tools, Parler falls back to enigo which may have limited compatibi
 
 ### System Requirements/Recommendations
 
-The following are recommendations for running Parler on your own machine. If you don't meet the system requirements, the performance of the application may be degraded. We are working on improving the performance across all kinds of computers and hardware.
+The following are recommendations for running Handy on your own machine. If you don't meet the system requirements, the performance of the application may be degraded. We are working on improving the performance across all kinds of computers and hardware.
 
 **For Whisper Models:**
 
@@ -263,11 +246,11 @@ The following are recommendations for running Parler on your own machine. If you
 
 ### Manual Model Installation (For Proxy Users or Network Restrictions)
 
-If you're behind a proxy, firewall, or in a restricted network environment where Parler cannot download models automatically, you can manually download and install them. The URLs are publicly accessible from any browser.
+If you're behind a proxy, firewall, or in a restricted network environment where Handy cannot download models automatically, you can manually download and install them. The URLs are publicly accessible from any browser.
 
 #### Step 1: Find Your App Data Directory
 
-1. Open Parler settings
+1. Open Handy settings
 2. Navigate to the **About** section
 3. Copy the "App Data Directory" path shown there, or use the shortcuts:
    - **macOS**: `Cmd+Shift+D` to open debug menu
@@ -344,32 +327,32 @@ Final structure should look like:
 **Important Notes:**
 
 - For Parakeet models, the extracted directory name **must** match exactly as shown above
-- Do not rename the `.bin` files for Whisper models—use the exact filenames from the download URLs
-- After placing the files, restart Parler to detect the new models
+- Do not rename the `.bin` files for Whisper models--use the exact filenames from the download URLs
+- After placing the files, restart Handy to detect the new models
 
 #### Step 5: Verify Installation
 
-1. Restart Parler
-2. Open Settings → Models
+1. Restart Handy
+2. Open Settings -> Models
 3. Your manually installed models should now appear as "Downloaded"
 4. Select the model you want to use and test transcription
 
 ### Custom Whisper Models
 
-Parler can auto-discover custom Whisper GGML models placed in the `models` directory. This is useful for users who want to use fine-tuned or community models not included in the default model list.
+Handy can auto-discover custom Whisper GGML models placed in the `models` directory. This is useful for users who want to use fine-tuned or community models not included in the default model list.
 
 **How to use:**
 
 1. Obtain a Whisper model in GGML `.bin` format (e.g., from [Hugging Face](https://huggingface.co/models?search=whisper%20ggml))
 2. Place the `.bin` file in your `models` directory (see paths above)
-3. Restart Parler to discover the new model
+3. Restart Handy to discover the new model
 4. The model will appear in the "Custom Models" section of the Models settings page
 
 **Important:**
 
 - Community models are user-provided and may not receive troubleshooting assistance
 - The model must be a valid Whisper GGML format (`.bin` file)
-- Model name is derived from the filename (e.g., `my-custom-model.bin` → "My Custom Model")
+- Model name is derived from the filename (e.g., `my-custom-model.bin` -> "My Custom Model")
 
 ## License
 
@@ -377,7 +360,7 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
 
-- **[cjpais/Handy](https://github.com/cjpais/Handy)** - the original project this fork is based on
+- **[cjpais/Handy](https://github.com/cjpais/Handy)** - the original project
 - **Whisper** by OpenAI for the speech recognition model
 - **whisper.cpp and ggml** for amazing cross-platform whisper inference/acceleration
 - **Silero** for great lightweight VAD

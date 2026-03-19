@@ -1,4 +1,4 @@
-const ParlerTextLogo = ({
+const HandyTextLogo = ({
   width,
   className,
 }: {
@@ -17,9 +17,9 @@ const ParlerTextLogo = ({
         width,
       }}
     >
-      <span className="text-logo-primary">PARLER</span>
+      <span className="text-logo-primary">HANDY</span>
     </div>
   );
 };
 
-export default ParlerTextLogo;
+export default HandyTextLogo;

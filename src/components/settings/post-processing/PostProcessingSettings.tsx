@@ -183,7 +183,7 @@ const PostProcessingActionsComponent: React.FC = () => {
                       <span className="text-xs text-mid-gray/60 ml-2">
                         {savedModels.find(
                           (m) =>
-                            m.id === \`\${action.provider_id}:\${action.model}\`,
+                            m.id === `${action.provider_id}:${action.model}`,
                         )?.label || action.model}
                       </span>
                     )}
